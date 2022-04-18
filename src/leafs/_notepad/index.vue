@@ -78,7 +78,7 @@
         <background mode="meteor" />
     </section>
     <!-- 登陆弹窗 -->
-    <dialogLogin 
+    <dialogLogin
         :dialogVisible="loginDialog"
         :changeRegister="changeRegisterDialog"
         :changeLoginDialog="changeLoginDialog"
@@ -131,7 +131,7 @@
             }
         }
         .icon {
-          @include BR(4px);  
+          @include BR(4px);
         }
     }
     .notepad_header_option {
@@ -201,7 +201,7 @@
                 color: $color-default-derived-02;
                 border-radius: 0 0 3px 3px;
             }
-            
+
         }
     }
 }
@@ -209,6 +209,7 @@
 .middle {
     display: block;
     width: 2px;
+	z-index: 1;
     cursor: col-resize;
     background: $color-default-derived-08;
     height: 100%;
@@ -231,6 +232,7 @@
     display: flex;
     position: relative;
     .notepad_sidebar_left {
+		z-index: 1;
         transition: all .3s;
         width: 160px;
         .notepad_list {
@@ -281,7 +283,7 @@
                     font-family:Verdana, Geneva, Tahoma, sans-serif;
                 }
                 transition: all .3s;
-                &:hover { 
+                &:hover {
                     background: $color-default-derived-08;
                     &::after {
                         content: "";
@@ -302,7 +304,7 @@
             .notepad_item_cur {
                 background: #665b34 !important;
                 opacity: .9;
-                &:hover { 
+                &:hover {
                     background: #bba14c !important;
                     opacity: 1;
                 }
@@ -386,7 +388,7 @@
                     font-family:Verdana, Geneva, Tahoma, sans-serif;
                 }
                 transition: all .3s;
-                &:hover { 
+                &:hover {
                     background: $color-default-derived-08;
                     &::after {
                         content: "";
@@ -398,7 +400,7 @@
                 background: #665b34 !important;
                 opacity: .9;
                 border: none;
-                &:hover { 
+                &:hover {
                     background: #bba14c !important;
                     opacity: 1;
                 }
@@ -410,6 +412,7 @@
         }
     }
     .notepad_sidebar_cont {
+		z-index: 1;
         color: $color-primary-derived-08;
         border: none;
         outline: none;
@@ -421,7 +424,7 @@
         font-family:'Courier New', Courier, monospace;
         &:hover{
             transition: .3s;
-            background:  $color-default-derived-08;
+            // background:  $color-default-derived-08;
         }
         img {
             width: 120px;
