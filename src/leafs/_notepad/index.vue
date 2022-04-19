@@ -242,6 +242,9 @@
                 transition: .3s;
                 height: 80%;
             }
+			.el-input__inner {
+
+			}
             .notepad_item {
                 cursor: pointer;
                 @include Flex-Direction(column);

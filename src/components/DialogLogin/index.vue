@@ -1,5 +1,6 @@
 <template>
 	<el-dialog
+	    custom-class="login-dialog"
         v-model="dialogVisible"
         title="请先登录"
         :modal="true"
@@ -12,7 +13,7 @@
             v-model="value"
             :fetch-suggestions="querySearch"
             class="inline-input"
-            placeholder="账号从输入提示中选一个"
+            placeholder="请输入您的昵称"
         />
         <el-input v-model="password" type="password" placeholder="请输入密码" />
         <template #footer>
@@ -28,6 +29,12 @@
 .inline-input {
     width: 100%;
     margin-bottom: 12px;
+}
+.login-dialog {
+	min-height: 280px;
+	.el-input__inner {
+		min-height: 40px;
+	}
 }
 .el-autocomplete__popper {
     z-index: 4202 !important;

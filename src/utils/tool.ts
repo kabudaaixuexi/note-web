@@ -26,9 +26,9 @@ export function debounce(func: any, wait: any, immediate: any) {
 
 /**
  * 名称、值以及过期天数
- * @param key 
- * @param value 
- * @param expiredays 
+ * @param key
+ * @param value
+ * @param expiredays
  */
 export function setCookie(key: any,value: any,expiredays: any){
   const exdate:any = new Date();
@@ -38,9 +38,9 @@ export function setCookie(key: any,value: any,expiredays: any){
 }
 
 /**
- * 
- * @param key 
- * @returns 
+ *
+ * @param key
+ * @returns
  */
 export function getCookie(key: any){
   if (document.cookie.length>0){
@@ -48,11 +48,21 @@ export function getCookie(key: any){
       if (c_start!=-1){
           c_start=c_start + key.length+1;
           let c_end: any = document.cookie.indexOf(";", c_start);
-          if (c_end==-1){ 
+          if (c_end==-1){
               c_end=document.cookie.length;
           }
           return unescape(document.cookie.substring(c_start,c_end));
       }
    }
   return "";
+}
+
+
+export const filterUser = (user: any, fa: any) => {
+	if (fa === 0) { // 加密
+		return JSON.stringify(user)
+	}
+	if (fa === 1) { //解密
+		return JSON.parse(user)
+	}
 }

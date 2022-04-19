@@ -35,9 +35,9 @@ export default defineComponent({
     })
     onMounted(() => {
     })
-    onUnmounted(() => { 
+    onUnmounted(() => {
     })
-    return { 
+    return {
       ...toRefs(state),
     };
   }
@@ -49,7 +49,7 @@ export default defineComponent({
 .notepad_header_other {
         @extend %Flex-Center-Start;
         padding-left: 100px;
-        padding-right: 70px;
+        padding-right: 40px;
         .el-upload {
             @extend %Flex-Center-Center;
         }

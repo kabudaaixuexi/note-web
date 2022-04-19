@@ -2,9 +2,9 @@ import axios from 'axios'
 import { ElMessage, ElLoading } from 'element-plus'
 const serves = axios.create({
   // baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:25566' : 'http://localhost:25566',
-  baseURL: 'http://124.220.16.124:8088',
+  baseURL: 'http://124.220.16.124:8888',
   method: 'post',
-  timeout: 5000
+  timeout: 10000
 })
 let loadingInstance = null
 // 设置请求发送之前的拦截器

@@ -41,6 +41,7 @@
 
 <script>
 import { defineComponent, onMounted, onUnmounted, reactive, toRefs } from "vue";
+import Api from '@/api'
 import moon from "@/store";
 export default defineComponent({
   name: "skin",
@@ -48,10 +49,18 @@ export default defineComponent({
   setup(props, context) {
     const state = reactive({
     });
-    const handleChangeStyle = (e) => {
-      moon.setState(e, "themeStyle");
+    const handleChangeStyle = async (themeStyle) => {
+		await Api.postModify({
+			id: moon.getState('userInfo').id,
+			extData: JSON.stringify({
+				...JSON.parse(moon.getState('userInfo').extData),
+				themeStyle
+			})
+		})
+        moon.setState(themeStyle, "themeStyle");
     };
-    onMounted(() => {});
+    onMounted(() => {
+	});
     onUnmounted(() => {});
     return {
       ...toRefs(state),
@@ -65,7 +74,7 @@ export default defineComponent({
 @import "@/styles/style.scss";
 .notepad_header_skin {
   @extend %Flex-Center-Start;
-  padding-left: 166px;
+  padding-left: 60px;
   svg {
     @include BR(3px);
     transition: 0.35s;

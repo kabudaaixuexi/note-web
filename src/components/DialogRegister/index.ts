@@ -8,7 +8,8 @@ import {
 } from "vue";
 import { ElMessage } from "element-plus";
 import moon from "@/store";
-import { setCookie, getCookie } from "@/utils/tool";
+import { filterUser } from "@/utils/tool";
+import api from "@/api";
 
 export default defineComponent({
   name: "dialogRegister",
@@ -17,16 +18,17 @@ export default defineComponent({
     changeRegisterDialog: Function,
     changeLogin: Function,
   },
-  setup(props, context) {
+  setup(props: any, context) {
     const ruleFormRef: any = ref();
     const state = reactive({
       ruleForm: {
-        useNname: "",
+        userName: "",
         passWord: "",
+		photo: "",
         desc: "",
       },
       rules: {
-        useNname: [
+        userName: [
           { required: true, message: "昵称不能为空", trigger: "blur" },
           {
             min: 1,
@@ -43,60 +45,51 @@ export default defineComponent({
           },
         ],
         desc: [
-          { required: true, message: "务必夸自己两句～", trigger: "blur" },
+          { required: true, message: "不妨夸自己两句～", trigger: "blur" },
         ],
       },
     });
-    // const resetForm = (formEl: any) => {
-    //     if (!formEl) return
-    //     formEl.resetFields()
-    //   }
+    const handleExceed = (ev: { data: any; }) => {
+        state.ruleForm.photo = ev.data
+    }
     const chatRegister = async () => {
-      console.log("注册");
-      console.log(ruleFormRef);
-
       await ruleFormRef.value.validate((valid: any, fields: any) => {
         if (valid) {
-          console.log("submit!");
+			const data: any = {
+				...state.ruleForm,
+				extData: JSON.stringify({
+					desc: state.ruleForm.desc
+				})
+			}
+			delete data.desc
+			api.postRegister(data).then(res => {
+				if(res.statusCode == 200) {
+					ElMessage({
+						type:'success',
+						message:"注册成功"
+					})
+					moon.setState(data, 'userInfo')
+					window.localStorage.setItem('userInfo', filterUser(data, 0) || '')
+					state.ruleForm = {
+						userName: "",
+						passWord: "",
+						photo: "",
+						desc: "",
+					}
+					props.changeRegisterDialog(false)
+				}
+			})
         } else {
           console.log("error submit!", fields);
         }
       });
-      //   moon.setState({
-      //     uid: state.value,
-      //     password: state.password,
-      //     arturl: state.restaurants.find(ev => ev.value == state.value).arturl
-      //   }, 'userInfo')
-      //   setCookie('uid', state.value, 10)
-      //   setCookie('password', state.password, 10)
-      //   setCookie('arturl', encodeURI(state.restaurants.find(ev => ev.value == state.value).arturl), 10)
-
-      //   const temU = state.restaurants.filter(i => {
-      //     return state.value == i.value
-      //   })
-      //   if (temU.length) {
-      //     context.emit('DialogVisible', false)
-      //   } else {
-      //     ElMessage({
-      //       type:'error',
-      //       message:"只能使用默认账号名称登录！"
-      //     })
-      //   }
     };
     onMounted(() => {
-      //   if (getCookie('uid') && getCookie('password')) {
-      //     moon.setState({
-      //       uid: getCookie('uid'),
-      //       password: getCookie('password'),
-      //       arturl: decodeURI(getCookie('arturl'))
-      //     }, 'userInfo')
-      //     context.emit('DialogVisible', false)
-      //   }
     });
     onUnmounted(() => {});
     return {
       ...toRefs(state),
-      ruleFormRef,
+      ruleFormRef,handleExceed,
       chatRegister,
     };
   },

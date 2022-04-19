@@ -96,7 +96,7 @@ export default defineComponent({
     // 获取笔记列表
     const getNoteList = async (cb: Function = () => {}) => {
         const { data } = await API.getNoteList({
-            uid: moon.getState('userInfo').uid
+            uid: moon.getState('userInfo').userName
         })
         // console.log(data);
         state.noteList = data
@@ -106,14 +106,14 @@ export default defineComponent({
     const preEditSubtitle = () => {
         state.disabled = false
     }
-    
+
     // 修改笔记加密状态
     const unlockChange = async () => {
         // 没有设置密码的加密
         if (!state.curNote?.lockValue) {
             changeEncryptionSuccess(true, state.unlockValue)
             await API.editNote({
-                uid: moon.getState('userInfo').uid,
+                uid: moon.getState('userInfo').userName,
                 noteid: state.curNote.noteid,
                 subtitle: state.curNote.subtitle,
                 vNode: state.curNote.vNode,
@@ -146,7 +146,7 @@ export default defineComponent({
         removeRender()
         state.curNote.lock = e
         await API.editNote({
-            uid: moon.getState('userInfo').uid,
+            uid: moon.getState('userInfo').userName,
             noteid: state.curNote.noteid,
             subtitle: state.curNote.subtitle,
             vNode:state.curNote.vNode,
@@ -222,7 +222,7 @@ export default defineComponent({
             return item
         }).filter((i: { content: string | string[]; subtitle: string | string[]; }) => i.content.indexOf('<spa') !== -1 || i.subtitle.indexOf('<spa>') !== -1)
     }
-    
+
     let timeout:NodeJS.Timeout
     const querySearchAsync = (queryString: string, cb: (arg: any) => void) => {
         clearTimeout(timeout)
@@ -230,7 +230,7 @@ export default defineComponent({
             cb(f(state.noteList, queryString))
         }, 3000 * Math.random())
       }
-      
+
     const handleSelect = (item: any) => {
         noteChange(state.noteList.filter((i: any)=> i.noteid == item.noteid)[0])
     }
@@ -238,7 +238,7 @@ export default defineComponent({
     const subtitleChange = async (ev: any) => {
         state.disabled = true
         await API.editNote({
-            uid: moon.getState('userInfo').uid,
+            uid: moon.getState('userInfo').userName,
             noteid: state.curNote.noteid,
             subtitle: ev,
             vNode: state.curNote.vNode,
@@ -251,7 +251,7 @@ export default defineComponent({
     const editNote = async (ev: any) => {
         if (!state.curNote) return
         await API.editNote({
-            uid: moon.getState('userInfo').uid,
+            uid: moon.getState('userInfo').userName,
             noteid: state.curNote.noteid,
             subtitle: state.curNote.subtitle,
             vNode: ev,
@@ -266,7 +266,7 @@ export default defineComponent({
     const addNote = async () => {
         removeRender()
         const { data } = await API.addNote({
-            uid: moon.getState('userInfo').uid,
+            uid: moon.getState('userInfo').userName,
             vNode: creatEmptyVNode(),
             subtitle: '',
             lockValue: '',
@@ -282,7 +282,7 @@ export default defineComponent({
         removeRender()
         if (!state.curNote) return
         const { data } = await API.removeNote({
-            uid: moon.getState('userInfo').uid,
+            uid: moon.getState('userInfo').userName,
             noteid: state.curNote.noteid,
         })
         let index = 0
@@ -314,45 +314,45 @@ export default defineComponent({
             if (e.repeat) {
               return
             }
-            if (e.code === 'KeyC' && e.metaKey) { 
+            if (e.code === 'KeyC' && e.metaKey) {
                 console.log('CommandOrControl+C')
                 changeStyle({
                     command: 'copy'
                 })
             }
-            if (e.code === 'KeyV' && e.metaKey) { 
+            if (e.code === 'KeyV' && e.metaKey) {
                 console.log('CommandOrControl+V')
                 const text = await window.navigator.clipboard.readText()
                 if (moon.getState('choice') === '粘贴全部信息') {
                     changeStyle({
                         command: 'paste'
-                    }) 
+                    })
                 } else {
                     await window.navigator.clipboard.writeText(text)
                     changeStyle({
                         command: 'paste'
-                    }) 
+                    })
                 }
             }
-            if (e.code === 'KeyX' && e.metaKey) { 
+            if (e.code === 'KeyX' && e.metaKey) {
                 console.log('CommandOrControl+X')
                 changeStyle({
                     command: 'cut'
                 })
             }
-            if (e.code === 'KeyA' && e.metaKey) { 
+            if (e.code === 'KeyA' && e.metaKey) {
                 console.log('CommandOrControl+A')
                 changeStyle({
                     command: 'selectAll'
                 })
             }
-            if (e.code === 'KeyZ' && e.metaKey) { 
+            if (e.code === 'KeyZ' && e.metaKey) {
                 console.log('CommandOrControl+Z')
                 changeStyle({
                     command: 'undo'
                 })
             }
-            if (e.code === 'KeyP' && e.metaKey) { 
+            if (e.code === 'KeyP' && e.metaKey) {
                 console.log('CommandOrControl+P')
                 if (window.getSelection()?.toString()) {
                     // ElNotification({

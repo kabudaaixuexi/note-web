@@ -21,6 +21,8 @@ serves.interceptors.response.use(res => {
   // 设置接受数据之后，做什么处理
   // loadingInstance.close()
   if (res.data.statusCode !== 200) {
+	  console.log(res);
+
     ElMessage.error(res.data.message)
   }
   return res
