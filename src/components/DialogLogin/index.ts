@@ -52,6 +52,7 @@ export default defineComponent({
 			userName: state.value,
 			passWord: state.password
 		})
+		if (!data) return
 		moon.setState(data, 'userInfo')
 		window.localStorage.setItem('userInfo', filterUser(data, 0) || '')
         props.changeLoginDialog(false)

@@ -8452,10 +8452,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sw-decorator-property@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/sw-decorator-property/-/sw-decorator-property-1.1.1.tgz#3720fb2bc1aa43502db7b09042292857f1d551d8"
-  integrity sha512-7iSUicGt41Cp9h05zBOY8mIjy3jXLcXiO/saqcHM4oZsKs7lZCcvRFyxL/Zq/G8V1LP1ZBuuw3z9iKcBEbTjPA==
+sw-decorator-property@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/sw-decorator-property/-/sw-decorator-property-1.1.2.tgz#dac3904ea6e930d687fe8c1b97100fbad0ad4b7d"
+  integrity sha512-DlTN2sqZvTAWhiGRytzARkXNXwpwcUkr4+PlcxxbHiFFYK6Y/DnBMNZyj+WIxYvOpFFPGVzBiOGysXNupqQwfA==
   dependencies:
     reflect-metadata "^0.1.13"
 
