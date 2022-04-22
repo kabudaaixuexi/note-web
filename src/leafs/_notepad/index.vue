@@ -17,7 +17,7 @@
         <fontStyle :changeStyle="changeStyle" :userInfo="userInfo"/>
 
         <!-- 翻译 -->
-        <translate  :changeStyle="changeStyle"/>
+        <!-- <translate  :changeStyle="changeStyle"/> -->
 
         <!-- 语音 -->
         <!-- <voice /> -->
@@ -55,7 +55,7 @@
         <user :unLogin="unLogin" :userInfo="userInfo"/>
     </nav>
     <section :class="`notepad_sidebar ${themeStyle}-theme-der`">
-        <article :style="{width: layoutType == 2? '160px' : '320px',minWidth: layoutType == 2? '120px':'280px'}" class="notepad_sidebar_left">
+        <article :style="{width: layoutType == 2? '200px' : '400px',minWidth: layoutType == 2? '200px':'400px'}" class="notepad_sidebar_left">
             <nav :class="{notepad_list:layoutType == 2,notepad_list_box:layoutType == 1}">
                 <div @dblclick="preEditSubtitle" draggable="true" @click="noteChange(item)" :class="{notepad_item:true,notepad_item_cur:curNote.noteid == item.noteid}" v-for="item in noteList" :key="item.noteid">
                     <svg @click="concealClick" v-show="item.lock" t="1642752345538" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1689" width="12" height="12"><path d="M385.150849 385.662338l-128.895105 0 0-150.377622q0-49.102897 19.436563-91.556444t53.706294-74.677323 80.815185-50.637363 101.786214-18.413586q49.102897 0 94.625375 18.413586t80.815185 50.637363 56.263736 74.677323 20.971029 91.556444l0 150.377622-123.78022 0 0-121.734266q0-64.447552-35.804196-99.74026t-97.182817-35.292707q-55.240759 0-88.999001 35.292707t-33.758242 99.74026l0 121.734266zM826.053946 447.040959q27.62038 0 47.568432 19.948052t19.948052 47.568432l0 317.122877q0 27.62038-9.718282 51.66034t-26.597403 41.942058-39.896104 28.131868-50.637363 10.22977l-516.603397 0q-27.62038 0-50.125874-10.22977t-38.361638-27.108891-24.551449-39.384615-8.695305-48.07992l0-324.283716q0-27.62038 19.436563-47.568432t47.056943-19.948052l61.378621 0 128.895105 0 255.744256 0 123.78022 0 61.378621 0z" p-id="1690" fill="#ffffff"></path></svg>
@@ -233,8 +233,8 @@
     position: relative;
     .notepad_sidebar_left {
 		z-index: 1;
-        transition: all .3s;
-        width: 160px;
+        transition: all .33s;
+        width: 200px;
         .notepad_list {
             height: 100%;
             overflow-y: auto;
