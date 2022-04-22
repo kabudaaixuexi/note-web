@@ -1,12 +1,12 @@
 {
   "name": "electron-w",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-		"co": "sh release.sh"
+    "co": "sh release.sh"
   },
   "dependencies": {
     "axios": "^0.26.1",
