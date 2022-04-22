@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 export default {
-    getDeskImgList:async (payload: any) => {
+    getPackages:async (payload: any) => {
         const { data } = await request({
-            url: '/upload/getFiles',
+            url: '/upload/getPackages',
             data: {...payload}
         })
         return data
     }
-} 
+}
