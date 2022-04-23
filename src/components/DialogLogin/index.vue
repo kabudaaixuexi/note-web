@@ -7,7 +7,7 @@
         :show-close="false"
         :close-on-press-escape="false"
         :close-on-click-modal="false"
-        width="30%"
+        width="60%"
     >
         <el-autocomplete
             v-model="value"
@@ -17,8 +17,8 @@
         />
         <el-input v-model="password" type="password" placeholder="请输入密码" />
         <template #footer>
-            <el-button @click="changeRegister(true)">注册账户</el-button>
-            <el-button type="primary" @click="chatLogin">确认登录</el-button>
+            <el-button size="small" @click="changeRegister(true)">注册账户</el-button>
+            <el-button size="small" type="primary" @click="chatLogin">确认登录</el-button>
         </template>
     </el-dialog>
 </template>
@@ -34,6 +34,9 @@
 	min-height: 280px;
 	.el-input__inner {
 		min-height: 40px;
+	}
+	.el-dialog__footer {
+		display: flex;
 	}
 }
 .el-autocomplete__popper {

@@ -392,14 +392,15 @@ export default defineComponent({
         state['registerDialog'] = false
         state['loginDialog'] = e
     }
-    const unLogin = () => {
-        moon.setState(null,'userInfo')
-        state['loginDialog'] = true
-    }
+
     // 注册
     const changeRegisterDialog = (e: any) => {
         state['loginDialog'] = false
         state['registerDialog'] = e
+    }
+	const unLogin = () => {
+        moon.setState(null,'userInfo')
+        state['loginDialog'] = true
     }
     // 看一眼密码
     const concealClick = () => {
@@ -409,7 +410,7 @@ export default defineComponent({
         })
     }
     return {
-      ...toRefs(state),
+      ...toRefs(state),Router,
       noteChange,
       changeStyle,
       unLogin,unlockChange,handleSelect,querySearchAsync,layoutChange,handleExceed,changeLoginDialog,changeRegisterDialog,addNote,removeNote,subtitleChange,preEditSubtitle,changeEncryption,concealClick,
