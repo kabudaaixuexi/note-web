@@ -8,7 +8,7 @@ import {
 	toRefs,
 	getCurrentInstance,
 } from "vue";
-import { UploadFilled } from '@element-plus/icons-vue'
+import { UploadFilled, Switch } from '@element-plus/icons-vue'
 import dialogLogin from '@/components/DialogLogin/index.vue';
 import dialogRegister from '@/components/DialogRegister/index.vue';
 import background from "../_notepad/components/Background.vue";
@@ -16,10 +16,9 @@ import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
 import API from "@/api";
 import moon from "@/store";
-
 export default defineComponent({
 	components: {
-		background,dialogLogin,dialogRegister,UploadFilled
+		background,dialogLogin,dialogRegister,UploadFilled,Switch
 	},
 	setup() {
 		const Router = useRouter();
@@ -44,15 +43,20 @@ export default defineComponent({
 			state['registerDialog'] = e
 		}
 		moon.watch('userInfo', (new_val: any)=>{
-			state.userInfo = new_val
-			state.superior = new_val.userName
-			getPackages();
-			getPortfolio()
+			if (new_val) {
+				console.log(new_val);
+				state.packageList= [],
+				state.portfolioList= [],
+				state.userInfo = new_val
+				state.superior = new_val.userName
+				getPackages();
+				getPortfolio()
+			}
 		})
 		onMounted(() => {
 
 		});
-		const getTouchStart = (value:any, type: string) => {
+		const getTouchStart = (value:any, type: string ) => {
 			clearTimeout(state.sufu);
 			state.sufu=setTimeout(async function(){
 				//  你要做的功能
@@ -61,26 +65,26 @@ export default defineComponent({
 						uid: state.userInfo.userName,
 						superior: `${state.superior}/${value.substring(value.lastIndexOf("/") + 1, value.length)}`
 					})
+					getPortfolio()
 					ElMessage({
 						message: '删除目录成功',
 						type: 'success',
 					})
-					getPortfolio()
 				}
 				if (type === 'pack') {
 					await API.delPackages({
 						uid: state.userInfo.userName,
 						superior: `${state.superior}/${value.substring(value.lastIndexOf("/") + 1, value.length)}`
 					})
+					getPackages();
 					ElMessage({
 						message: '删除文件成功',
 						type: 'success',
 					})
-					getPackages();
 				}
 			}, 2000);
 		}
-		const getTouchEnd = () => {
+		const getTouchEnd = (ev: any) => {
 			clearTimeout(state.sufu);
 		}
 		// 返回上一级
@@ -135,10 +139,13 @@ export default defineComponent({
 			});
 			state.packageList = data
 		};
-
+		const unLogin = () => {
+			moon.setState(null,'userInfo')
+			state['loginDialog'] = true
+		}
 		return {
 			...toRefs(state),
-			Router,changeLoginDialog,changeRegisterDialog,setPortfolio,openPortfolio,openPackage, getPackages,
+			Router,changeLoginDialog,changeRegisterDialog,setPortfolio,openPortfolio,openPackage, getPackages,unLogin,
 			upperLevel,getTouchStart,getTouchEnd
 		};
 	},

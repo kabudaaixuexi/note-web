@@ -5,19 +5,22 @@
 			<el-button @click="setPortfolio" type="primary">添加文件夹</el-button>
 		</el-row>
 		<el-row justify="space-between">
-			<el-button @click="upperLevel">返回上一级</el-button>
-			<p style="padding-top:12px;font-size:12px;color: #fff"><i>tip :</i> 长按两秒以上删除目录或文件</p>
+			<div>
+				<el-button size="small" @click="upperLevel">返回上一级</el-button>
+				<el-button size="small" type="warning" @click="unLogin">切换账号</el-button>
+			</div>
+			<p style="padding-top:12px;font-size:12px;color: #fff"><i>tip :</i> 长按两秒删除目录或文件</p>
 		</el-row>
 		<article class="portfolio">
 			<figure @touchstart="getTouchStart(port, 'port')" @touchend="getTouchEnd" v-for="(port, i) in portfolioList" :key="i">
-				<img @click="openPortfolio(port)" src="" @error="(e)=>(e.target.src='http://124.220.16.124:8099/files/noteFiles/icon.png')" alt="">
-				<figcaption>目录
+				<img @click="openPortfolio(port)" :src="require('@/assets/logo.png')" alt="">
+				<figcaption>
 					{{ port.substring(port.lastIndexOf("/") + 1, port.length) }}
 				</figcaption>
 			</figure>
 			<figure @touchstart="getTouchStart(pack, 'pack')" @touchend="getTouchEnd" v-for="(pack, i) in packageList" :key="i">
 				<img @click="openPackage(pack)" :src="pack"  alt="">
-				<figcaption>文件
+				<figcaption>
 					{{ pack.substring(pack.lastIndexOf("/") + 1, pack.length) }}
 				</figcaption>
 			</figure>
@@ -60,12 +63,22 @@
 <style lang="scss" scoped>
 @import "@/styles/style.scss";
 .path {
-	color: aliceblue
+	color: aliceblue;
+	max-width: 60vw;
+	@extend %OVT;
 }
+
 .container {
+	-webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 	@extend %Max;
 	background: midnightblue;
-	padding: 4%;
+	padding: 4% 4% 10%;
+	overflow-y: auto;
 	.portfolio {
 		height: 54vh;
 		@include BR(8px);

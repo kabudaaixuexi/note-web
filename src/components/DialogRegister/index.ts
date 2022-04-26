@@ -68,8 +68,8 @@ export default defineComponent({
 						type:'success',
 						message:"注册成功"
 					})
-					moon.setState(res, 'userInfo')
-					window.localStorage.setItem('userInfo', filterUser(res, 0) || '')
+					moon.setState(res.data, 'userInfo')
+					window.localStorage.setItem('userInfo', filterUser(res.data, 0) || '')
 					state.ruleForm = {
 						userName: "",
 						passWord: "",

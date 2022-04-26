@@ -6,7 +6,7 @@
     :show-close="false"
     :close-on-press-escape="false"
     :close-on-click-modal="false"
-    width="30%"
+    width="70%"
   >
     <el-form
       ref="ruleFormRef"
@@ -51,8 +51,8 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="changeLogin(true)">前往登录</el-button>
-      <el-button type="primary" @click="chatRegister">确认并登录</el-button>
+      <el-button size="small" @click="changeLogin(true)">前往登录</el-button>
+      <el-button size="small" type="primary" @click="chatRegister">确认并登录</el-button>
     </template>
   </el-dialog>
 </template>
