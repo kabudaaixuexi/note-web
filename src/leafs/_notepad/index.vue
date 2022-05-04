@@ -14,7 +14,7 @@
         </article>
 
         <!-- 字体 -->
-        <fontStyle :changeStyle="changeStyle" :userInfo="userInfo"/>
+        <!-- <fontStyle :changeStyle="changeStyle" :userInfo="userInfo"/> -->
 
         <!-- 翻译 -->
         <!-- <translate  :changeStyle="changeStyle"/> -->
@@ -45,9 +45,6 @@
         <!-- 换肤 -->
         <skin />
 
-        <!-- 设置 -->
-        <setup />
-
         <!-- 天气 -->
         <weather />
 
@@ -74,7 +71,7 @@
             </nav>
         </article>
         <middle class="middle"></middle>
-        <article contenteditable allowDrop :class="`notepad_sidebar_cont`" />
+        <article id="xs-editor-note" />
         <background mode="meteor" />
     </section>
     <!-- 登陆弹窗 -->
@@ -276,6 +273,7 @@
                         line-height: 20px !important;
                         background: none;
                         border: none;
+						box-shadow: none;
                         padding: 0;
                         @extend %OVT;
                         @extend %Max-Width;
@@ -307,7 +305,7 @@
                     bottom: 0px;
                     position: absolute;
                     background: $color-default-derived-04;
-                    height: 1px;
+                    height: calc(1px /2);
                     transform: scaleY(.5);
                 }
             }
@@ -365,7 +363,7 @@
                 margin:10px;
                 padding: 11px 20px;
                 height: 60px;
-                border:1px solid $color-default-derived-04;
+                border:calc(1px / 2) solid $color-default-derived-04;
                 svg {
                     position:absolute;
                     right: 6px;
@@ -421,25 +419,16 @@
             }
         }
     }
-    .notepad_sidebar_cont {
-		z-index: 1;
-        color: $color-primary-derived-08;
+    #xs-editor-note {
+        // color: $color-primary-derived-08;
         border: none;
         outline: none;
-        padding: 18px 12px;
         flex: 1;
-        margin-right: 2px;
+		z-index: 1;
+		width: calc(100% - 202px);
+        // margin-right: 2px;
         height: 100%;
-        overflow-y: auto;
-        font-family:'Courier New', Courier, monospace;
-        &:hover{
-            transition: .3s;
-            // background:  $color-default-derived-08;
-        }
-        img {
-            width: 120px;
-            height: auto;
-        }
+        // overflow-y: auto;
     }
 }
 </style>

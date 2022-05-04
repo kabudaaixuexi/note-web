@@ -55,6 +55,7 @@ export default defineComponent({
 		if (!data) return
 		moon.setState(data, 'userInfo')
 		window.localStorage.setItem('userInfo', filterUser(data, 0) || '')
+		JSON.parse(data.extData || '{}').themeStyle && moon.setState(JSON.parse(data.extData || '{}').themeStyle, "themeStyle");
         props.changeLoginDialog(false)
     }
 	const getUserList = async () => {
@@ -67,7 +68,9 @@ export default defineComponent({
 	}
     onMounted(() => {
       if (window.localStorage.getItem('userInfo')) {
-        moon.setState(filterUser(window.localStorage.getItem('userInfo'), 1), 'userInfo')
+	    let userInfo = filterUser(window.localStorage.getItem('userInfo'), 1)
+        moon.setState(userInfo, 'userInfo')
+		JSON.parse(userInfo.extData || '{}').themeStyle && moon.setState(JSON.parse(userInfo.extData || '{}').themeStyle, "themeStyle");
         props.changeLoginDialog(false)
       }
 	  getUserList()

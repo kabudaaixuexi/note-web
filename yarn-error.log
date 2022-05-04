@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /Users/kaburda/.yarn/bin/yarn.js serve
+  /usr/local/bin/node /Users/kaburda/.yarn/bin/yarn.js add xs-editor
 
 PATH: 
   /Users/kaburda/.yarn/bin:/Users/kaburda/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kaburda/.yarn/bin:/Users/kaburda/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/opt/homebrew/sbin:/opt/homebrew/bin
@@ -8,37 +8,34 @@ Yarn version:
   1.22.5
 
 Node version: 
-  14.17.4
+  16.13.2
 
 Platform: 
-  darwin x64
+  darwin arm64
 
 Trace: 
-  SyntaxError: /Users/kaburda/Desktop/electron/electron-w/package.json: Unexpected token / in JSON at position 1027
-      at JSON.parse (<anonymous>)
-      at /Users/kaburda/.yarn/lib/cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (/Users/kaburda/.yarn/lib/cli.js:310:30)
-      at /Users/kaburda/.yarn/lib/cli.js:321:13
+  Error: EACCES: permission denied, mkdir '/Users/kaburda/Desktop/electron/note-web/node_modules/xs-editor/lib/depub'
 
 npm manifest: 
   {
-    "name": "electron-w",
-    "version": "0.1.0",
+    "name": "more_convenient",
+    "version": "0.1.3",
     "private": true,
     "scripts": {
       "serve": "vue-cli-service serve",
       "build": "vue-cli-service build",
-      "lint": "vue-cli-service lint"
+      "lint": "vue-cli-service lint",
+      "co": "sh release.sh"
     },
     "dependencies": {
       "axios": "^0.26.1",
       "core-js": "^3.6.5",
       "element-plus": "^2.1.9",
       "socket.io-client": "^4.4.1",
-      "sw-decorator-property": "^1.1.1",
+      "sw-decorator-property": "^1.1.2",
       "vue": "^3.0.0",
-      "vue-router": "^4.0.0-0"
+      "vue-router": "^4.0.0-0",
+      "xs-editor": "^0.1.4"
     },
     "devDependencies": {
       "@types/js-md5": "^0.4.3",
@@ -58,21 +55,21 @@ npm manifest:
       "sass-loader": "^8.0.2",
       "typescript": "~4.1.5"
     },
-    // "eslintConfig": {
-    //   "root": true,
-    //   "env": {
-    //     "node": true
-    //   },
-    //   "extends": [
-    //     "plugin:vue/vue3-essential",
-    //     "eslint:recommended",
-    //     "@vue/typescript/recommended"
-    //   ],
-    //   "parserOptions": {
-    //     "ecmaVersion": 2020
-    //   },
-    //   "rules": {}
-    // },
+    "eslintConfig": {
+      "root": true,
+      "env": {
+        "node": true
+      },
+      "extends": [
+        "plugin:vue/vue3-essential",
+        "eslint:recommended",
+        "@vue/typescript/recommended"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 2020
+      },
+      "rules": {}
+    },
     "browserslist": [
       "> 1%",
       "last 2 versions",
@@ -2296,6 +2293,14 @@ Lockfile:
     dependencies:
       follow-redirects "^1.14.8"
   
+  axios@^0.27.1:
+    version "0.27.1"
+    resolved "https://registry.npmjs.org/axios/-/axios-0.27.1.tgz#badcc8cc38cfa812320221b600776452141ea5d4"
+    integrity sha512-ePNMai55xo5GsXajb/k756AqZqpqeDaGwGcdvbZLSSELbbYwsIn2jNmGfUPEwd8j/yu4OoMstLLIVa4t0MneEA==
+    dependencies:
+      follow-redirects "^1.14.9"
+      form-data "^4.0.0"
+  
   babel-code-frame@^6.22.0:
     version "6.26.0"
     resolved "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -3024,7 +3029,7 @@ Lockfile:
       color-convert "^1.9.3"
       color-string "^1.6.0"
   
-  combined-stream@^1.0.6, combined-stream@~1.0.6:
+  combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
     version "1.0.8"
     resolved "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
     integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -3176,6 +3181,19 @@ Lockfile:
       schema-utils "^1.0.0"
       serialize-javascript "^4.0.0"
       webpack-log "^2.0.0"
+  
+  copyfiles@^2.4.1:
+    version "2.4.1"
+    resolved "https://registry.npmjs.org/copyfiles/-/copyfiles-2.4.1.tgz#d2dcff60aaad1015f09d0b66e7f0f1c5cd3c5da5"
+    integrity sha512-fereAvAvxDrQDOXybk3Qu3dPbOoKoysFMWtkY3mv5BsL8//OSZVL5DCLYqgRfY5cWirgRzlC+WSrxp6Bo3eNZg==
+    dependencies:
+      glob "^7.0.5"
+      minimatch "^3.0.3"
+      mkdirp "^1.0.4"
+      noms "0.0.0"
+      through2 "^2.0.1"
+      untildify "^4.0.0"
+      yargs "^16.1.0"
   
   core-js-compat@^3.20.2, core-js-compat@^3.21.0, core-js-compat@^3.6.5:
     version "3.22.0"
@@ -4515,7 +4533,7 @@ Lockfile:
       inherits "^2.0.3"
       readable-stream "^2.3.6"
   
-  follow-redirects@^1.0.0, follow-redirects@^1.14.8:
+  follow-redirects@^1.0.0, follow-redirects@^1.14.8, follow-redirects@^1.14.9:
     version "1.14.9"
     resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
     integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
@@ -4560,6 +4578,15 @@ Lockfile:
       semver "^5.6.0"
       tapable "^1.0.0"
       worker-rpc "^0.1.0"
+  
+  form-data@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.npmjs.org/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+    integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
+    dependencies:
+      asynckit "^0.4.0"
+      combined-stream "^1.0.8"
+      mime-types "^2.1.12"
   
   form-data@~2.3.2:
     version "2.3.3"
@@ -4740,7 +4767,7 @@ Lockfile:
     resolved "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz#8c5a1494d2066c570cc3bfe4496175acc4d502ab"
     integrity sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs=
   
-  glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4:
+  glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4:
     version "7.2.0"
     resolved "https://registry.npmjs.org/glob/-/glob-7.2.0.tgz#d15535af7732e02e948f4c41628bd910293f6023"
     integrity sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==
@@ -5646,6 +5673,11 @@ Lockfile:
     dependencies:
       is-docker "^2.0.0"
   
+  isarray@0.0.1:
+    version "0.0.1"
+    resolved "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+    integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
+  
   isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
     version "1.0.0"
     resolved "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
@@ -6201,7 +6233,7 @@ Lockfile:
     resolved "https://registry.npmjs.org/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
     integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
   
-  minimatch@^3.0.4:
+  minimatch@^3.0.3, minimatch@^3.0.4:
     version "3.1.2"
     resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
     integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
@@ -6250,6 +6282,11 @@ Lockfile:
     integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
     dependencies:
       minimist "^1.2.6"
+  
+  mkdirp@^1.0.4:
+    version "1.0.4"
+    resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
+    integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
   
   move-concurrently@^1.0.1:
     version "1.0.1"
@@ -6397,6 +6434,14 @@ Lockfile:
     version "2.0.3"
     resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.3.tgz#225ee7488e4a5e636da8da52854844f9d716ca96"
     integrity sha512-maHFz6OLqYxz+VQyCAtA3PTX4UP/53pa05fyDNc9CwjvJ0yEh6+xBwKsgCxMNhS8taUKBFYxfuiaD9U/55iFaw==
+  
+  noms@0.0.0:
+    version "0.0.0"
+    resolved "https://registry.npmjs.org/noms/-/noms-0.0.0.tgz#da8ebd9f3af9d6760919b27d9cdc8092a7332859"
+    integrity sha1-2o69nzr51nYJGbJ9nNyAkqczKFk=
+    dependencies:
+      inherits "^2.0.1"
+      readable-stream "~1.0.31"
   
   normalize-package-data@^2.5.0:
     version "2.5.0"
@@ -7540,6 +7585,16 @@ Lockfile:
       string_decoder "^1.1.1"
       util-deprecate "^1.0.1"
   
+  readable-stream@~1.0.31:
+    version "1.0.34"
+    resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-1.0.34.tgz#125820e34bc842d2f2aaafafe4c2916ee32c157c"
+    integrity sha1-Elgg40vIQtLyqq+v5MKRbuMsFXw=
+    dependencies:
+      core-util-is "~1.0.0"
+      inherits "~2.0.1"
+      isarray "0.0.1"
+      string_decoder "~0.10.x"
+  
   readdirp@^2.2.1:
     version "2.2.1"
     resolved "https://registry.npmjs.org/readdirp/-/readdirp-2.2.1.tgz#0e87622a3325aa33e892285caf8b4e846529a525"
@@ -7791,6 +7846,13 @@ Lockfile:
     version "2.7.1"
     resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
     integrity sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
+    dependencies:
+      glob "^7.1.3"
+  
+  rimraf@^3.0.2:
+    version "3.0.2"
+    resolved "https://registry.npmjs.org/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+    integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
     dependencies:
       glob "^7.1.3"
   
@@ -8426,6 +8488,11 @@ Lockfile:
     dependencies:
       safe-buffer "~5.2.0"
   
+  string_decoder@~0.10.x:
+    version "0.10.31"
+    resolved "https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
+    integrity sha1-YuIDvEF2bGwoyfyEMB2rHFMQ+pQ=
+  
   string_decoder@~1.1.1:
     version "1.1.1"
     resolved "https://registry.npmjs.org/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -8538,10 +8605,10 @@ Lockfile:
       unquote "~1.1.1"
       util.promisify "~1.0.0"
   
-  sw-decorator-property@^1.1.1:
-    version "1.1.1"
-    resolved "https://registry.npmjs.org/sw-decorator-property/-/sw-decorator-property-1.1.1.tgz#3720fb2bc1aa43502db7b09042292857f1d551d8"
-    integrity sha512-7iSUicGt41Cp9h05zBOY8mIjy3jXLcXiO/saqcHM4oZsKs7lZCcvRFyxL/Zq/G8V1LP1ZBuuw3z9iKcBEbTjPA==
+  sw-decorator-property@^1.1.2:
+    version "1.1.2"
+    resolved "https://registry.npmjs.org/sw-decorator-property/-/sw-decorator-property-1.1.2.tgz#dac3904ea6e930d687fe8c1b97100fbad0ad4b7d"
+    integrity sha512-DlTN2sqZvTAWhiGRytzARkXNXwpwcUkr4+PlcxxbHiFFYK6Y/DnBMNZyj+WIxYvOpFFPGVzBiOGysXNupqQwfA==
     dependencies:
       reflect-metadata "^0.1.13"
   
@@ -8612,7 +8679,7 @@ Lockfile:
       loader-utils "^1.1.0"
       neo-async "^2.6.0"
   
-  through2@^2.0.0:
+  through2@^2.0.0, through2@^2.0.1:
     version "2.0.5"
     resolved "https://registry.npmjs.org/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
     integrity sha512-/mrRod8xqpA+IHSLyGCQ2s8SPHiCDEeQJSep1jqLYeEUClOFG2Qsh+4FU6G9VeqpZnGW/Su8LQGc4YKni5rYSQ==
@@ -8927,6 +8994,11 @@ Lockfile:
     dependencies:
       has-value "^0.3.1"
       isobject "^3.0.0"
+  
+  untildify@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.npmjs.org/untildify/-/untildify-4.0.0.tgz#2bc947b953652487e4600949fb091e3ae8cd919b"
+    integrity sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==
   
   upath@^1.1.1:
     version "1.2.0"
@@ -9428,6 +9500,16 @@ Lockfile:
     resolved "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz#91360c86b914e67f44dce769180027c0da618c67"
     integrity sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==
   
+  xs-editor@^0.1.4:
+    version "0.1.4"
+    resolved "https://registry.npmjs.org/xs-editor/-/xs-editor-0.1.4.tgz#7386fc250fa1ffaf2929909ca9b126868ea6c29d"
+    integrity sha512-Pp3AcJtTI94et5TJ+G6M3T3oNlwvi8ggYvzaH1K25MZZ9FGzIDiMYodCysraJSK+bcKvluiHMNB9Ka40vSsHlA==
+    dependencies:
+      axios "^0.27.1"
+      copyfiles "^2.4.1"
+      reflect-metadata "^0.1.13"
+      rimraf "^3.0.2"
+  
   xtend@^4.0.0, xtend@~4.0.1:
     version "4.0.2"
     resolved "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
@@ -9492,7 +9574,7 @@ Lockfile:
       y18n "^4.0.0"
       yargs-parser "^13.1.2"
   
-  yargs@^16.0.0:
+  yargs@^16.0.0, yargs@^16.1.0:
     version "16.2.0"
     resolved "https://registry.npmjs.org/yargs/-/yargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
     integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==

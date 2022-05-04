@@ -4,9 +4,9 @@ import axios from 'axios'
 export const listenerDrag = function () {
     var resize = (document.querySelector(".middle") as any);
     var left = (document.querySelector(".notepad_sidebar_left") as any);
-    var right = (document.querySelector(".notepad_sidebar_cont") as any);
+    var right = (document.querySelector("#xs-editor-note") as any);
     var box = (document.querySelector(".notepad_sidebar") as any);
-    // console.log(resize, left, right, box, 'lkhghjk');
+    console.log(resize, left, right, box, 'lkhghjk');
     resize.onmousedown = function (e: any) {
         var startX = e.clientX;
         resize.left = resize.offsetLeft;
@@ -14,7 +14,7 @@ export const listenerDrag = function () {
             var endX = e.clientX;
             var moveLen = resize.left + (endX - startX);
             var maxT = box.clientWidth - resize.offsetWidth;
-            if (moveLen < 120) moveLen = 120;
+            if (moveLen < 196) moveLen = 196;
             if (moveLen > maxT - 500) moveLen = maxT - 500;
             resize.style.left = moveLen;
             left.style.width = moveLen + "px";
@@ -128,12 +128,12 @@ export const getVNode = (node: any) => {
      *    - 元素节点
      *      + 获取到元素的 name 与 attr
      *      + 获取到的属性是一个伪数组，将伪书组转换为对象
-     *    - 文本节点    
+     *    - 文本节点
     */
     let nodeType = node.nodeType;
 
     let _vnode = null;
-    if (nodeType === 1) { // 元素节点              
+    if (nodeType === 1) { // 元素节点
         let nodeName = node.nodeName;
 
         let attrs = node.attributes;
@@ -158,7 +158,7 @@ export const getVNode = (node: any) => {
 }
 
 /*
-* 将虚拟DOM转化为DOM   
+* 将虚拟DOM转化为DOM
 * 递归会影响性能，
 * 真正的vue源码使用的是 vue + 栈 数据类型
 */

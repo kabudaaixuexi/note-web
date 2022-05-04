@@ -13,7 +13,6 @@ import dialogRegister from '@/components/DialogRegister/index.vue';
 import background from './components/Background.vue';
 import translate from './components/Translate.vue';
 import weather from './components/Weather.vue';
-import setup from './components/Setup.vue';
 import skin from './components/Skin.vue';
 import voice from './components/Voice.vue';
 import uploadImg from './components/UploadImg.vue';
@@ -26,10 +25,11 @@ import { fontNames, fontSizes } from "./config"
 import { debounce } from '@/utils/tool'
 import API from '@/api'
 import moon from "@/store";
+import foundEdit from 'xs-editor'
 
 export default defineComponent({
   components: {
-    background,dialogLogin,dialogRegister,weather,translate,setup,voice,fontStyle,uploadImg,user,skin
+    background,dialogLogin,dialogRegister,weather,translate,voice,fontStyle,uploadImg,user,skin
   },
   setup() {
     const Router = useRouter();
@@ -55,50 +55,16 @@ export default defineComponent({
     // 左侧切换
     const noteChange = (e: any) => {
       if (state.curNote.noteid != e.noteid) {
-        removeRender()
         state.curNote = e;
+		foundXsEditor(e.vNode)
         state.unlockValue = ''
-        recoveryRender()
       }
     };
-    // 删除编辑区
-    const removeRender = () => {
-        state.loading = ElLoading.service({
-            lock: true,
-            // text: 'Loading',
-            background: 'rgba(0, 0, 0, 0.4)',
-          })
-        var self = document.querySelector(`.notepad_sidebar_cont`);
-        var parent = document.querySelector(`.notepad_sidebar`);
-        self && parent?.removeChild(self);
-    }
-    // 恢复编辑区
-    const recoveryRender = () => {
-        state.loading?.close()
-        state.loading = null
-        console.log('恢复编辑区恢复编辑区');
-        var parent = document.querySelector(`.notepad_sidebar`);
-        console.log(parent,'parent');
-        const newVNode = state.curNote ? state.curNote.vNode : creatEmptyVNode()
-        console.log(newVNode,'newVNode');
-        newVNode._data.contenteditable = !state.curNote?.lock
-        parent?.appendChild(parse(newVNode))
-        listeners()
-    }
-    // 修改编辑区域
-    const changeStyle = (data: { command: any; value?: any; }) => {
-        console.log(data);
-        data.value
-        ? document.execCommand(data.command, false, data.value)
-        : document.execCommand(data.command, false, '');
-    };
-
     // 获取笔记列表
     const getNoteList = async (cb: Function = () => {}) => {
         const { data } = await API.getNoteList({
             uid: moon.getState('userInfo').userName
         })
-        // console.log(data);
         state.noteList = data
         cb ()
     }
@@ -125,6 +91,7 @@ export default defineComponent({
                 type: 'success',
             })
             state.unlockVisible = false
+			foundXsEditor(state.curNote.vNode, false)
             return
         }
         // 设置过的走校验
@@ -135,6 +102,7 @@ export default defineComponent({
                 type: 'success',
             })
             state.unlockVisible = false
+			foundXsEditor(state.curNote.vNode)
         } else {
             ElMessage({
                 type:'error',
@@ -143,7 +111,6 @@ export default defineComponent({
         }
     }
     const changeEncryptionSuccess = async (e: any, ev = state.curNote.lockValue) => {
-        removeRender()
         state.curNote.lock = e
         await API.editNote({
             uid: moon.getState('userInfo').userName,
@@ -152,10 +119,6 @@ export default defineComponent({
             vNode:state.curNote.vNode,
             lockValue: ev,
             lock: e,
-        })
-        getNoteList(() => {
-            state.curNote = state.noteList.filter((i: { noteid: any; }) => i.noteid == state.curNote.noteid)[0] || null
-            recoveryRender()
         })
     }
     const changeEncryption = async (e: any) => {
@@ -172,26 +135,13 @@ export default defineComponent({
                 message: '笔记已加密,不可被编辑',
                 type: 'warning',
             })
+			foundXsEditor(state.curNote.vNode, false)
         } else {
             state.unlockTitle = '解锁笔记'
             state.unlockVisible = true
         }
     }
-    // 点击上传添加图片
-    const handleExceed = (ev: { data: any; }) => {
-        !sessionStorage.getItem('count') && sessionStorage.setItem('count','1')
-        var self = document.querySelector(`.notepad_sidebar_cont`);
-        sessionStorage.getItem('count') == '1' && changeStyle({
-            command: 'insertImage',
-            value: `${ev.data}`
-        })
-        // 添加点击事件
-        repaintImg(self)
-        sessionStorage.setItem('count','2')
-        setTimeout(()=> {
-            sessionStorage.setItem('count','1')
-        })
-    }
+
     // 搜索笔记
     const f = (list: any, queryString: string) => {
         const temList = JSON.parse(JSON.stringify(list))
@@ -249,7 +199,13 @@ export default defineComponent({
     }
     // 修改笔记实时保存
     const editNote = async (ev: any) => {
-        if (!state.curNote) return
+        if (!state.curNote) {
+			ElMessage({
+				message: `您应该先创建一篇笔记`,
+				type: 'warning',
+			})
+			return
+		}
         await API.editNote({
             uid: moon.getState('userInfo').userName,
             noteid: state.curNote.noteid,
@@ -264,8 +220,7 @@ export default defineComponent({
     }
     // 新增笔记
     const addNote = async () => {
-        removeRender()
-        const { data } = await API.addNote({
+        await API.addNote({
             uid: moon.getState('userInfo').userName,
             vNode: creatEmptyVNode(),
             subtitle: '',
@@ -274,14 +229,13 @@ export default defineComponent({
         })
         getNoteList(() => {
             state.curNote = state.noteList[0] || null
-            recoveryRender()
+            foundXsEditor(state.curNote.vNode)
         })
     }
     // 删除笔记
     const removeNote = async () => {
-        removeRender()
         if (!state.curNote) return
-        const { data } = await API.removeNote({
+        await API.removeNote({
             uid: moon.getState('userInfo').userName,
             noteid: state.curNote.noteid,
         })
@@ -293,99 +247,36 @@ export default defineComponent({
         })
         getNoteList(() => {
             state.curNote = state.noteList[index - 1] || null
-            recoveryRender()
+            foundXsEditor(state.curNote.vNode)
         })
     }
-    // 监听修改
-    const listeners = () => {
-        console.log('添加一些监听事件');
-        const EditedDom = document.querySelector(`.notepad_sidebar_cont`);
-        EditedDom?.addEventListener("input", debounce((ev: any) => {
-          editNote(getVNode(ev.target));
-        }, 300, false)
-        );
-        repaintImg(EditedDom)
-        listenerDrop(EditedDom);
-        listenerDrag();
-    }
-    // 监听键盘
-    const ipcRendererListeners = () => {
-        document.onkeydown = async e => {
-            if (e.repeat) {
-              return
-            }
-            if (e.code === 'KeyC' && e.metaKey) {
-                console.log('CommandOrControl+C')
-                changeStyle({
-                    command: 'copy'
-                })
-            }
-            if (e.code === 'KeyV' && e.metaKey) {
-                console.log('CommandOrControl+V')
-                const text = await window.navigator.clipboard.readText()
-                if (moon.getState('choice') === '粘贴全部信息') {
-                    changeStyle({
-                        command: 'paste'
-                    })
-                } else {
-                    await window.navigator.clipboard.writeText(text)
-                    changeStyle({
-                        command: 'paste'
-                    })
-                }
-            }
-            if (e.code === 'KeyX' && e.metaKey) {
-                console.log('CommandOrControl+X')
-                changeStyle({
-                    command: 'cut'
-                })
-            }
-            if (e.code === 'KeyA' && e.metaKey) {
-                console.log('CommandOrControl+A')
-                changeStyle({
-                    command: 'selectAll'
-                })
-            }
-            if (e.code === 'KeyZ' && e.metaKey) {
-                console.log('CommandOrControl+Z')
-                changeStyle({
-                    command: 'undo'
-                })
-            }
-            if (e.code === 'KeyP' && e.metaKey) {
-                console.log('CommandOrControl+P')
-                if (window.getSelection()?.toString()) {
-                    // ElNotification({
-                    //     title: '查询信息',
-                    //     message: `${window.getSelection()?.toString()}`,
-                    // })
-                    const Exp = new RegExp(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/)
-                    const url = Exp.test((window.getSelection() as any).toString()) ? window.getSelection()?.toString() : `https://www.baidu.com/s?wd=${window.getSelection()?.toString()}`
-                    window.open(url)
-                }
-            }
-          }
-    }
-    moon.watch('userInfo', (new_val: any)=>{
-      state.userInfo = new_val
-      removeRender()
-      setTimeout(() => {
-          if (moon.getState('userInfo')) {
-              getNoteList(()=>{
-                  state.curNote = state.noteList[0] || null
-                  recoveryRender()
-               })
-          } else {
-              recoveryRender()
-          }
-      })
+
+    moon.watch('userInfo', (newest: any)=>{
+      state.userInfo = newest
+	  setTimeout(() => {
+		moon.getState('userInfo') && getNoteList(()=>{
+			state.curNote = state.noteList[0] || null
+			foundXsEditor(state.curNote.vNode, !state.curNote.lock)
+		})
+	  })
     })
+	const foundXsEditor = (value: any = null, operable: Boolean = true) => {
+		foundEdit(document.querySelector('#xs-editor-note'), {
+			value,
+			operable,
+			upFileUrl: 'http://124.220.16.124:8099/upload/setFilesNote',
+			onChange: (vm: Element, vn:any) => {
+				editNote(vn)
+			}
+		}, () => {
+			listenerDrag()
+		})
+	}
+	moon.watch('themeStyle', (ne: any) => (state.themeStyle = ne))
     onMounted(() => {
-      moon.watch('themeStyle', (ne: any) => (state.themeStyle = ne))
-      ipcRendererListeners()
+
     });
     onUnmounted(() => {
-        window.removeEventListener('keyup',()=>{})
     });
     // 登录
     const changeLoginDialog = (e: any) => {
@@ -412,8 +303,7 @@ export default defineComponent({
     return {
       ...toRefs(state),Router,
       noteChange,
-      changeStyle,
-      unLogin,unlockChange,handleSelect,querySearchAsync,layoutChange,handleExceed,changeLoginDialog,changeRegisterDialog,addNote,removeNote,subtitleChange,preEditSubtitle,changeEncryption,concealClick,
+      unLogin,unlockChange,handleSelect,querySearchAsync,layoutChange,changeLoginDialog,changeRegisterDialog,addNote,removeNote,subtitleChange,preEditSubtitle,changeEncryption,concealClick,
       fontNames,fontSizes
     };
   },

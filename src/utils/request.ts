@@ -2,6 +2,7 @@ import axios from 'axios'
 import { ElMessage, ElLoading } from 'element-plus'
 const serves = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:8099' : 'http://124.220.16.124:8099',
+//   baseURL: process.env.NODE_ENV === 'development' ? 'http://124.220.16.124:8099' : 'http://124.220.16.124:8099',
   method: 'post',
   timeout: 5000
 })

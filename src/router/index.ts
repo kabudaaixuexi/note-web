@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/portfolio',
     name: 'portfolio',
     component: () => import('../leafs/_portfolio/index.vue'), meta: { title: '虚拟网盘' }
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('../leafs/_test/index.vue'), meta: { title: '虚拟网盘' }
   }
 ]
 
