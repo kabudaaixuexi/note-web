@@ -82,13 +82,13 @@ getWeather((ev: any) => {
 <style scoped>
 .weather {
     font-size: 5.6px;
-    margin-left: 48px;
+    margin-left: 68px;
 	display: flex;
-    /* background-color:saddlebrown ; */
+	align-items: center;
+    justify-content: center;
+	flex-direction: column;
 }
 .weather-title {
-	height: 52px;
-	margin-top: 30px;
 	margin-right: -10px;
 	line-height: 170%;
 	white-space: nowrap;

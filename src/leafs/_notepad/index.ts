@@ -147,9 +147,9 @@ export default defineComponent({
         const temList = JSON.parse(JSON.stringify(list))
         return temList.map((item: { content: any; vNode: any; value: string; subtitle: string; }) => {
             item.content = []
-            const getValue = (children: { _value: any; children: any[]; }) => {
-                if (children._value) {
-                    item.content.push(children._value)
+            const getValue = (children: { xs_value: any; children: any[]; }) => {
+                if (children.xs_value) {
+                    item.content.push(children.xs_value)
                 }
                 if (children.children) {
                    children.children.map(i => {
@@ -178,7 +178,7 @@ export default defineComponent({
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             cb(f(state.noteList, queryString))
-        }, 3000 * Math.random())
+        }, 2000 * Math.random())
       }
 
     const handleSelect = (item: any) => {
@@ -264,6 +264,7 @@ export default defineComponent({
 		foundEdit(document.querySelector('#xs-editor-note'), {
 			value,
 			operable,
+			watermark: state.userInfo.userName,
 			upFileUrl: 'http://124.220.16.124:8099/upload/setFilesNote',
 			onChange: (vm: Element, vn:any) => {
 				editNote(vn)

@@ -33,6 +33,18 @@
           <el-dropdown-item style="padding-bottom: 16px">
             <div @click="handleChangeStyle('yummy')" class="box yummy-theme">食欲</div>
           </el-dropdown-item>
+		  <el-dropdown-item style="padding-bottom: 16px">
+            <div @click="handleChangeStyle('alien')" class="box alien-theme">另类</div>
+          </el-dropdown-item>
+		  <el-dropdown-item style="padding-bottom: 16px">
+            <div @click="handleChangeStyle('hope')" class="box hope-theme">希望</div>
+          </el-dropdown-item>
+		  <el-dropdown-item style="padding-bottom: 16px">
+            <div @click="handleChangeStyle('young')" class="box young-theme">年轻</div>
+          </el-dropdown-item>
+		  <el-dropdown-item style="padding-bottom: 16px">
+            <div @click="handleChangeStyle('gloomy')" class="box gloomy-theme">雨天</div>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

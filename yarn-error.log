@@ -8,18 +8,18 @@ Yarn version:
   1.22.5
 
 Node version: 
-  16.13.2
+  12.19.0
 
 Platform: 
-  darwin arm64
+  darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/Users/kaburda/Desktop/electron/note-web/node_modules/xs-editor/lib/depub'
+  Error: EACCES: permission denied, unlink '/Users/kaburda/Desktop/electron/note-web/node_modules/copyfiles/node_modules/mkdirp/CHANGELOG.md'
 
 npm manifest: 
   {
     "name": "more_convenient",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "private": true,
     "scripts": {
       "serve": "vue-cli-service serve",
@@ -35,7 +35,7 @@ npm manifest:
       "sw-decorator-property": "^1.1.2",
       "vue": "^3.0.0",
       "vue-router": "^4.0.0-0",
-      "xs-editor": "^0.1.4"
+      "xs-editor": "^0.4.3"
     },
     "devDependencies": {
       "@types/js-md5": "^0.4.3",
@@ -2293,14 +2293,6 @@ Lockfile:
     dependencies:
       follow-redirects "^1.14.8"
   
-  axios@^0.27.1:
-    version "0.27.1"
-    resolved "https://registry.npmjs.org/axios/-/axios-0.27.1.tgz#badcc8cc38cfa812320221b600776452141ea5d4"
-    integrity sha512-ePNMai55xo5GsXajb/k756AqZqpqeDaGwGcdvbZLSSELbbYwsIn2jNmGfUPEwd8j/yu4OoMstLLIVa4t0MneEA==
-    dependencies:
-      follow-redirects "^1.14.9"
-      form-data "^4.0.0"
-  
   babel-code-frame@^6.22.0:
     version "6.26.0"
     resolved "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -3029,7 +3021,7 @@ Lockfile:
       color-convert "^1.9.3"
       color-string "^1.6.0"
   
-  combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
+  combined-stream@^1.0.6, combined-stream@~1.0.6:
     version "1.0.8"
     resolved "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
     integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -4533,7 +4525,7 @@ Lockfile:
       inherits "^2.0.3"
       readable-stream "^2.3.6"
   
-  follow-redirects@^1.0.0, follow-redirects@^1.14.8, follow-redirects@^1.14.9:
+  follow-redirects@^1.0.0, follow-redirects@^1.14.8:
     version "1.14.9"
     resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
     integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
@@ -4578,15 +4570,6 @@ Lockfile:
       semver "^5.6.0"
       tapable "^1.0.0"
       worker-rpc "^0.1.0"
-  
-  form-data@^4.0.0:
-    version "4.0.0"
-    resolved "https://registry.npmjs.org/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
-    integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
-    dependencies:
-      asynckit "^0.4.0"
-      combined-stream "^1.0.8"
-      mime-types "^2.1.12"
   
   form-data@~2.3.2:
     version "2.3.3"
@@ -9500,12 +9483,11 @@ Lockfile:
     resolved "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz#91360c86b914e67f44dce769180027c0da618c67"
     integrity sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==
   
-  xs-editor@^0.1.4:
-    version "0.1.4"
-    resolved "https://registry.npmjs.org/xs-editor/-/xs-editor-0.1.4.tgz#7386fc250fa1ffaf2929909ca9b126868ea6c29d"
-    integrity sha512-Pp3AcJtTI94et5TJ+G6M3T3oNlwvi8ggYvzaH1K25MZZ9FGzIDiMYodCysraJSK+bcKvluiHMNB9Ka40vSsHlA==
+  xs-editor@^0.4.3:
+    version "0.4.3"
+    resolved "https://registry.npmjs.org/xs-editor/-/xs-editor-0.4.3.tgz#520a6da4c71074916f1dcc8173284136dcf23670"
+    integrity sha512-7ej4M7MC9Kw6+jiQ5AYop+UkUtZabafhd3mq3sjaA6HIOzQg3CiLHGeyMnlI/B57tQnv/jyaz/hfdTGL3+zykw==
     dependencies:
-      axios "^0.27.1"
       copyfiles "^2.4.1"
       reflect-metadata "^0.1.13"
       rimraf "^3.0.2"
