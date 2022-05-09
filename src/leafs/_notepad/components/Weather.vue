@@ -86,7 +86,6 @@ getWeather((ev: any) => {
 	display: flex;
 	align-items: center;
     justify-content: center;
-	flex-direction: column;
 }
 .weather-title {
 	margin-right: -10px;

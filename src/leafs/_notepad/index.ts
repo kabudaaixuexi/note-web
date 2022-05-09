@@ -56,7 +56,9 @@ export default defineComponent({
     const noteChange = (e: any) => {
       if (state.curNote.noteid != e.noteid) {
         state.curNote = e;
-		foundXsEditor(e.vNode)
+		console.log(e,'eee');
+
+		foundXsEditor(e.vNode, !e.lock)
         state.unlockValue = ''
       }
     };
@@ -254,17 +256,21 @@ export default defineComponent({
     moon.watch('userInfo', (newest: any)=>{
       state.userInfo = newest
 	  setTimeout(() => {
-		moon.getState('userInfo') && getNoteList(()=>{
-			state.curNote = state.noteList[0] || null
-			foundXsEditor(state.curNote.vNode, !state.curNote.lock)
-		})
+		if (moon.getState('userInfo')) {
+			getNoteList(()=>{
+				state.curNote = state.noteList[0] || null
+				foundXsEditor(state.curNote.vNode, !state.curNote.lock)
+			})
+		} else {
+			foundXsEditor()
+		}
 	  })
     })
 	const foundXsEditor = (value: any = null, operable: Boolean = true) => {
 		foundEdit(document.querySelector('#xs-editor-note'), {
 			value,
 			operable,
-			watermark: state.userInfo.userName,
+			watermark: state.userInfo ? state.userInfo.userName : null,
 			upFileUrl: 'http://124.220.16.124:8099/upload/setFilesNote',
 			onChange: (vm: Element, vn:any) => {
 				editNote(vn)
