@@ -9400,10 +9400,10 @@ xmlhttprequest-ssl@~2.0.0:
   resolved "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz#91360c86b914e67f44dce769180027c0da618c67"
   integrity sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==
 
-xs-editor@^0.4.7:
-  version "0.4.7"
-  resolved "https://registry.npmjs.org/xs-editor/-/xs-editor-0.4.7.tgz#1b99a309e46adc7a6178ed08f34d8a27d13373f9"
-  integrity sha512-Mx/dv4GDzK8bOMnl5CR0WnQu5Jjzqpd6bxFsP71LhefFx2fRkyn6Dzi57coL0c66rnLA22ifh+nks6jDvd+kHA==
+xs-editor@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.npmjs.org/xs-editor/-/xs-editor-0.4.8.tgz#2cb180cb790b4f332a2ff6328ba0721f7f80dc00"
+  integrity sha512-fdGNC6q/PYodHPomkv7G+AATRZA9YJyCZCMbm5ODOEcU4YDBYRlq8D/xkWz/mfE7QuSRdHAOqy8BgoKrqDdAAg==
   dependencies:
     copyfiles "^2.4.1"
     reflect-metadata "^0.1.13"

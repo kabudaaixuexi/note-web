@@ -16,7 +16,7 @@
     "sw-decorator-property": "^1.1.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "xs-editor": "^0.4.7"
+    "xs-editor": "^0.4.8"
   },
   "devDependencies": {
     "@types/js-md5": "^0.4.3",
